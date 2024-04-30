@@ -12,7 +12,6 @@ export class PlayersService {
   constructor(
     @InjectRepository(Player)
     private playerRepository: Repository<Player>,
-    private readonly commonHelper: CommonHelper,
   ) {}
 
   async create(body: CreatePlayerDto) {
