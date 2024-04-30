@@ -3,14 +3,19 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Team } from './team.entity';
+import { Player } from 'src/modules/players/entities/player.entity';
 
 @Entity('team_player_mapping')
 export class TeamPlayerMapping {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column({ name: 'team_id', type: 'uuid', nullable: false })
   teamId: string;
@@ -26,4 +31,12 @@ export class TeamPlayerMapping {
 
   @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp', default: 'null' })
   deletedAt: Date;
+
+  @ManyToOne(() => Team, (team) => team.id)
+  @JoinColumn({ name: 'team_id' })
+  team: Team;
+
+  @OneToOne(() => Player, (player) => player.id)
+  @JoinColumn({ name: 'player_id' })
+  player: Player;
 }

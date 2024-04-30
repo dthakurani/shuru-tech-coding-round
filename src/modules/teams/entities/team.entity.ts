@@ -3,14 +3,16 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { TeamPlayerMapping } from './team-player-mapping.entity';
 
 @Entity('teams')
 export class Team {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column({ name: 'name', type: 'varchar', nullable: false })
   name: string;
@@ -23,4 +25,10 @@ export class Team {
 
   @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp', default: 'null' })
   deletedAt: Date;
+
+  @OneToMany(
+    () => TeamPlayerMapping,
+    (teamPlayerMapping) => teamPlayerMapping.team,
+  )
+  teamPlayerMapping: TeamPlayerMapping[];
 }

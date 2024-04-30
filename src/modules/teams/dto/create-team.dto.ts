@@ -6,5 +6,5 @@ export class CreateTeamDto {
 
   @IsNotEmpty()
   @IsArray()
-  players_id: string[];
+  playersId: string[];
 }

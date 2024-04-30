@@ -13,6 +13,7 @@ import { CommonModule } from './modules/common/common.module';
 import { GuardsModule } from './modules/guards/guard.module';
 import { PlayersModule } from './modules/players/players.module';
 import { TeamsModule } from './modules/teams/teams.module';
+import { MatchesModule } from './modules/matches/matches.module';
 import awsConfig from './config/aws.config';
 
 @Module({
@@ -31,6 +32,7 @@ import awsConfig from './config/aws.config';
     CommonModule,
     PlayersModule,
     TeamsModule,
+    MatchesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

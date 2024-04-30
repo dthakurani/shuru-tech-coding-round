@@ -32,7 +32,7 @@ export class TeamsService {
     const teamPlayersAlreadyAssigned =
       await this.teamPlayerMappingRepository.find({
         where: {
-          playerId: In(body.players_id),
+          playerId: In(body.playersId),
         },
       });
 
@@ -46,7 +46,7 @@ export class TeamsService {
 
     const team = await this.teamRepository.save({ name: body.name });
 
-    const teamPlayerMapping = body.players_id.map((playerId) => ({
+    const teamPlayerMapping = body.playersId.map((playerId) => ({
       teamId: team.id.toString(),
       playerId,
     }));
