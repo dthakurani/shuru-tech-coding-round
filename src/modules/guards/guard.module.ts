@@ -6,7 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ConfigService } from '@nestjs/config';
 import { AllConfigType } from '../../config/config.type';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from '../users/entities/user.entity';
+// import { User } from '../users/entities/user.entity';
 
 @Global()
 @Module({
@@ -27,7 +27,7 @@ import { User } from '../users/entities/user.entity';
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([User]),
+    // TypeOrmModule.forFeature([User]),
   ],
   providers: [AuthGuard, CryptoService, JwtService],
   exports: [AuthGuard, CryptoService],

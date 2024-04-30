@@ -4,7 +4,6 @@ import { JwtService } from '@nestjs/jwt';
 import { CryptoService } from '../../utils/crypto';
 import { CustomException } from '../../utils/custom-exception';
 import { ConfigService } from '@nestjs/config';
-import { User } from '../users/entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -13,9 +12,6 @@ export class AuthGuard implements CanActivate {
   constructor(
     private readonly jwtService: JwtService,
     private readonly cryptService: CryptoService,
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
-    private readonly configService: ConfigService,
   ) {}
 
   private extractTokenFromHeader(request: Request): string | undefined {
@@ -33,29 +29,29 @@ export class AuthGuard implements CanActivate {
         throw new Error('Bearer token is required');
       }
 
-      const decryptedToken = this.cryptService.decrypt(token);
+      // const decryptedToken = this.cryptService.decrypt(token);
 
-      request.auth = await this.jwtService.verifyAsync(decryptedToken, {
-        secret: this.configService.getOrThrow('auth.jwtSecret', {
-          infer: true,
-        }),
-      });
+      // request.auth = await this.jwtService.verifyAsync(decryptedToken, {
+      //   secret: this.configService.getOrThrow('auth.jwtSecret', {
+      //     infer: true,
+      //   }),
+      // });
 
-      if (!request.auth.device_name) {
-        throw new Error('Invalid token');
-      }
+      // if (!request.auth.device_name) {
+      //   throw new Error('Invalid token');
+      // }
 
-      const user = await this.userRepository.findOne({
-        where: { id: request.auth.id },
-      });
+      // const user = await this.userRepository.findOne({
+      //   where: { id: request.auth.id },
+      // });
 
-      if (!user) {
-        throw new Error('User not found');
-      }
+      // if (!user) {
+      //   throw new Error('User not found');
+      // }
 
-      delete (user as { password?: string }).password;
+      // delete (user as { password?: string }).password;
 
-      request['user'] = user;
+      // request['user'] = user;
     } catch (error) {
       console.log('✔️ ~ AuthGuard ~ canActivate ~ error:', error);
       throw new CustomException().throwHttpException({

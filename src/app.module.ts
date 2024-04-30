@@ -11,6 +11,7 @@ import { AppService } from './app.service';
 import { MorganLoggerMiddleware } from './modules/common/middlewares/morgan-logger.middleware';
 import { CommonModule } from './modules/common/common.module';
 import { GuardsModule } from './modules/guards/guard.module';
+import { PlayersModule } from './modules/players/players.module';
 import awsConfig from './config/aws.config';
 
 @Module({
@@ -27,6 +28,7 @@ import awsConfig from './config/aws.config';
     }),
     GuardsModule,
     CommonModule,
+    PlayersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
